@@ -15,7 +15,18 @@ COPY ./local-app /home/app/
 WORKDIR /home/app/
 
 # will execute npm install in /home/app because of WORKDIR
+RUN npm cache clean --force
+
 RUN npm install
+
+
+#install express module
+RUN npm install express
+
+#install ejs module
+RUN npm install ejs
+
+RUN npm install pug
 
 #Install mongoose
 RUN npm install mongoose

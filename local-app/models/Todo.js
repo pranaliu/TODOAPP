@@ -57,8 +57,9 @@ const mongoose = require('mongoose');
  const TodoSchema =  new mongoose.Schema({
     title: { type: String, required: true },
     date: { type: Date, required: true },
-    description: { type: String, required: false }
-  });
+    description: { type: String, required: false }}, 
+     {collection : 'TODODB' }
+     );
   
   module.exports = new mongoose.model("Todo", TodoSchema);
 
