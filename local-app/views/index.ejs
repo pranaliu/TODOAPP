@@ -15,26 +15,15 @@
 </nav>
 
 <div class="container mt-5">
-    <form action="/add/todo" method="POST" class="d-flex">
-        <input type="text" name="title" class="form-control" placeholder="Enter Title">
-        <input type="datetime-local" name="date" class="form-control" placeholder="Enter Date">
-        <input type="text" name="description" class="form-control" placeholder="Enter Description">
-        <input type="submit" value="Add Todo" class="btn btn-md btn-primary mx-2">
-    </form>
-       <ul>
-       <% allTodo.forEach(todo => { %>
+    <a class="btn btn-md btn-primary mx-2" href="/todo/create">Create New Todo</a>
+    <ul>
+        <% allTodo.forEach(todo => { %>
         <li>
-          <h3><%= todo.title %>
-        </h3> 
-          <p>Date: <%= todo.date.toDateString() %></p>
-          <p><%= todo.description %></p>
-          <form action="/delete/todo/<%= todo._id %>" method="POST">
-            <button  class="btn btn-danger btn-sm" type="submit">Delete</button>
-        </form>
+            <a href="/todo/<%= todo._id %>"><%= todo.title %></a>       
         </li>
-      <% }); %>
-
+       <% }); %>
     </ul>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
