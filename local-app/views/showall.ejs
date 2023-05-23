@@ -11,19 +11,17 @@
 
 <body>
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/">Todo App</a>
+    <a class="navbar-brand" href="/">Show all Todo List</a>
 </nav>
 
 <div class="container mt-5">
-    <% if (user) { %>
-        <p> Hello <%= user.firstName %> </p>
-        <a href=“<%= fusionAuthURL %>/oauth2/logout/?client_id=<%= clientId %>” > Logout </a>
-        <%} else { %>
-        <a href=“<%= fusionAuthURL %>/oauth2/authorize?client_id=<%= clientId %>&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth-redirect&scope=offline_access&state=<%= stateValue %>&code_challenge=<%= challenge %>&code_challenge_method=S256”> Login </a>
-        <p> Welcome to TODO APP </p>     
-        <a class="btn btn-md btn-primary mx-2" href="/todo/create">Create New Todo</a>
-        <a class="btn btn-md btn-primary mx-2" href="/get/todo">Show all Todo</a>
-    <% } %>
+    <ul>
+        <% todos.forEach(todo => { %>
+        <li>
+            <a href="/todo/<%= todo._id %>"><%= todo.title %></a>       
+        </li>
+       <% }); %>
+    </ul>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

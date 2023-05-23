@@ -12,7 +12,7 @@ router
 // GET /get/todo - List all todos
   .get('/get/todo', async (req, res) => {
     const todos = await Todo.find();
-    res.render('index', { todos });
+    res.render('showall', { todos });
   }) 
 
 // GET /todos/:id - Show a specific todo

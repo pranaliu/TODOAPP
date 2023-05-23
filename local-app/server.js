@@ -3,13 +3,21 @@ let path = require('path');
 let fs = require('fs');
 const mongoose = require('mongoose');
 let MongoClient = require('mongodb').MongoClient;
+var createError = require('http-errors');
+var cookieParser = require('cookie-parser');
+var expressSession = require('express-session');
+var logger = require('morgan');
+var dotenv = require('dotenv').config();
 let bodyParser = require('body-parser');
 let app = express();
 
 //middleware
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-app.use(express.static("public"));
+//app.use(express.static("public"));
+app.use(cookieParser());
+app.use(expressSession({resave: false, saveUninitialized: false, secret: 'fusionauth-node-example'}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //app.engine('html',require('ejs').renderFile);
 //app.set('views', path.join(__dirname, 'views'));

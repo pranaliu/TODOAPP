@@ -16,10 +16,10 @@
     <input type="text"  id="title" name="title" class="form-control" value="<%= todo.title %>" required>
 
     <label for="date">Date:</label>
-    <input type="date" id="date" name="date" class="form-control" value="<%= todo.date.toISOString().substr(0, 10) %>" required>
+    <input type="date" id="date" name="date" class="form-control" value="<%= todo.date.toISOString().split('T')[0] %>" required>
 
     <label for="description">Description:</label>
-    <textarea id="description" name="description" class="form-control" required><%= todo.description %></textarea>
+    <input type="text" id="description" name="description" class="form-control" value="<%= todo.description %>">
 
     <button type="submit">Update</button>
     </div>

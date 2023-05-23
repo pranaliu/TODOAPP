@@ -55,6 +55,7 @@ const mongoose = require('mongoose');
 
 //Set ToDo Schema as per requirement
  const TodoSchema =  new mongoose.Schema({
+  //user specification user UUID connect with Users collection
     title: { type: String, required: true },
     date: { type: Date, required: true },
     description: { type: String, required: false }}, 
