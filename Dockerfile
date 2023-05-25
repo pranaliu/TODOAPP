@@ -28,6 +28,9 @@ RUN npm install ejs
 
 RUN npm install pug
 
+#install axios
+RUN npm install --save axios
+
 #Install mongoose
 RUN npm install mongoose
 

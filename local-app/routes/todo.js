@@ -1,20 +1,55 @@
 const router = require("express").Router();
 const Todo = require("../models/Todo");
 const { getSharedValue } = require('./shared');
-const util = require('util');   
+const util = require('util'); 
+const axios = require('axios');  
+const {FusionAuthClient} = require('@fusionauth/typescript-client');
 // Application ID and user role to match
 const targetApplicationId =  process.env.CLIENT_ID;
+const fusionAuthURL = process.env.BASE_URL;
 const targetUserRole = 'admin';
 
 
 // routes
 router
+//FusionAuth API to use for User retrieval : GET /api/user/registration/{userId}/{applicationId}
+// Create New Start Page with User API details 
+.get('/todo/api/start', async(req, res) => {
+  // Find out if  Role is Admin 
+  //Retrieve individual user's details
+  const sharedValue = getSharedValue();
+  console.log("PRANALI USER ID is :" + util.inspect(sharedValue['id']));
+  console.log("PRANALI Application ID:" + targetApplicationId); 
+  const userId = util.inspect(sharedValue['id']);
+ //Call User Retrieval API for getting required details 
+ // Use the params for API to call the Fusion Auth API and get User Role 
+ // See if you need to generate authentication token and save before 
+ //PUT ${fusionAuthURL}/api/user/registration
+ // Then check authentication generated token for further use if needed.
+  await axios.get(`${fusionAuthURL}/${userId}/${targetApplicationId}`)
+                .then(res => {
+                                console.log('Status Code:', res.status);
+                                const userData = userResponse.data;
+                                console.log("FusionAuth API response is:"+ util.inspect(userData) );
+
+    
+                              })
+                .catch(err => {
+                                  console.log('Error: ', err.message);
+                              });          
+  
+ // console.log("FusionAuth API response is:"+ util.inspect(userData) );
+// Render admin info and based on that redirect to correct links with if statement in ejs
+  res.render('start', {user: sharedValue });
+})
+
+
 // GET /todos/create - Show the form to create a new todo
 // Since Create page does not have any response to bind eith DB, this is empty page to render on keep first in routes
 .get('/todo/start', (req, res) => {
-  // Find out if  Role is Admin 
+    // Find out if  Role is Admin 
    //Retrieve individual user's details
-   const sharedValue = getSharedValue();
+    const sharedValue = getSharedValue();
    // console.log("PRANALI USER Data :" + util.inspect(sharedValue));
    //console.log("PRANALI USER Email is:" + util.inspect(sharedValue['email'])); 
 
@@ -46,11 +81,11 @@ router
        //Retrieve individual user's details
       // const sharedValue = getSharedValue();
       // console.log("PRANALI USER Data :" + util.inspect(sharedValue));
-       console.log("PRANALI USER Email is:" + util.inspect(sharedValue['email'])); 
-       const EmailValue =  util.inspect(sharedValue['email']);
-       const userEmail = EmailValue.slice(1, -1);
+    console.log("PRANALI USER Email is:" + util.inspect(sharedValue['email'])); 
+    const EmailValue =  util.inspect(sharedValue['email']);
+    const userEmail = EmailValue.slice(1, -1);
 
-   console.log("PRANALI USER Active Status is:" + util.inspect(sharedValue['active']));  
+    console.log("PRANALI USER Active Status is:" + util.inspect(sharedValue['active']));  
    //console.log("PRANALI Application matched username :" + util.inspect(username));
    //console.log("PRANALI Application matched userid :"+ util.inspect(userid));
    //console.log("PRANALI Roles1 are:" + util.inspect(roles));
@@ -59,7 +94,7 @@ router
 
 
   // Render admin info and based on that redirect to correct links with if statement in ejs
-  res.render('start', {user: sharedValue, AdminUser: adminResult, userEmail : userEmail });
+    res.render('start', {user: sharedValue, AdminUser: adminResult, userEmail : userEmail });
 })
 
 
