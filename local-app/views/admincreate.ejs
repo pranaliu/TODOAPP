@@ -12,7 +12,8 @@
 </nav>
 <body>
   <h1>Create New Todo</h1>
-  <form action="/add/todo" method="POST" class="d-flex">
+  <form action="/add/admin/todo" method="POST" class="d-flex">
+    <input type="text" name="email" class="form-control" placeholder="Enter user email for ToDo">
     <input type="text" name="title" class="form-control" placeholder="Enter Title" required>
     <input type="date" name="date" class="form-control" placeholder="Enter Date" required>
     <input type="text" name="description" class="form-control" placeholder="Enter Description">

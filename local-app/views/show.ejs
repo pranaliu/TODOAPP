@@ -11,6 +11,7 @@
   <h1><%= todo.title %></h1>
   <p>Date: <%= todo.date.toDateString() %></p>
   <p><%= todo.description %></p>
+  <p><%= todo.userEmail %></p>
   
   <a class="btn btn-md btn-primary mx-2" href="/edit/todo/<%= todo._id %>">Edit</a>
   <form action="/delete/todo/<%= todo._id %>" method="POST">

@@ -15,14 +15,21 @@
 </nav>
 
 <div class="container mt-5">
-    <ul>
-        <% todos.forEach(todo => { %>
-        <li>
-            <a href="/todo/<%= todo._id %>"><%= todo.title %></a>       
-        </li>
-       <% }); %>
-    </ul>
-
+    <body>
+        <% if (todos) { %>
+        <p> Here is your ToDo List </p>
+          <ul>
+            <% todos.forEach(todo => { %>
+            <li>
+                <a href="/todo/<%= todo._id %>"><%= todo.title %></a>       
+            </li>
+           <% }); %>
+        </ul>
+        <% } else { %>
+          <h1>No Tasks to view</h1>
+        <% } %>
+      </body>
+    
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
