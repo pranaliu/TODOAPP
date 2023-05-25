@@ -7,12 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo App</title>
 </head>
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="/">Todo App</a>
-</nav>
-
+<body>
 <div class="container mt-5">
-  <p> Admin user is <%= AdminUser %> </p>
   <% if (AdminUser === 'true') { %>
       <p> Hello Admin <%= user.firstName %> </p>
       <p> Welcome to TODO APP </p>  
@@ -25,4 +21,5 @@
       <a class="btn btn-md btn-primary mx-2" href="/get/todo/<%= userEmail %>">Show all Todo</a>     
   <% } %>
 </div>
+</body>
 </html>
