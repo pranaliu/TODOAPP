@@ -20,7 +20,9 @@
         <a class="btn btn-md btn-primary mx-2" href="/todo/start">Let's Get Started!</a>
         <a href=“<%= fusionAuthURL %>/oauth2/logout/?client_id=<%= clientId %>” > Logout </a>
         <%} else { %>
-        <p> Please use Login to authenticate yourself. </p>     
+        <p> Please use Login to authenticate yourself. </p>   
+        <a href="http://localhost:3000/login">  Login with FusionAuth </a>  
+        <p> Login with Fusion Auth config</p>
         <a href=“<%= fusionAuthURL %>/oauth2/authorize?client_id=<%= clientId %>&response_type=code&redirect_uri=http://localhost:3000/oauth-redirect&scope=offline_access&state=<%= stateValue %>&code_challenge=<%= challenge %>&code_challenge_method=S256”> Login </a>
     <% } %>
 </div>

@@ -23,8 +23,27 @@ router
   const userId = util.inspect(sharedValue['id']);
  //Call User Retrieval API for getting required details 
  // Use the params for API to call the Fusion Auth API and get User Role 
- // See if you need to generate authentication token and save before 
- //PUT ${fusionAuthURL}/api/user/registration
+ // Generate authentication token and save before using it to validate user
+ /* PRANALI Comment below code for now
+  const data = {
+      "generateAuthenticationToken": true,
+      "registration": {
+        "applicationId": targetApplicationId ,
+        "data": {
+          "displayName": "Pranali",
+         
+        },
+        "id": userId,
+        "username": "pranalitiecon@gmail.com"
+      }
+    };
+
+    //await axios.put (`${fusionAuthURL}/api/user/registration`, data).then(response => {
+router.patch(`/api/user/registration`, data,  function (req, res, next) {
+  res.send('PATCH request successful');
+  console.log('PRANALI Response:', res.data);
+});
+
  // Then check authentication generated token for further use if needed.
   await axios.get(`${fusionAuthURL}/${userId}/${targetApplicationId}`)
                 .then(res => {
@@ -39,9 +58,28 @@ router
                               });          
   
  // console.log("FusionAuth API response is:"+ util.inspect(userData) );
+ */
+// Check if User info is retrieved at basic level
+// GET /api/user/{userId}
+router.get('/api/user/${userId}', function (req, res, next) {
+  res.send('get request successful');
+  console.log("PRANALI response is:" + res.json);
+  
+
+});
+
+router.get('/oauth2/userinfo').then((res) => {
+  rconsole.log("PRANALI Oauth2 userinfo Response is:"+ res.json);
+}).catch((err) => {console.log("PRANALI in error"); console.error(JSON.stringify(err));});
+
+
+
+
+
 // Render admin info and based on that redirect to correct links with if statement in ejs
-  res.render('start', {user: sharedValue });
-})
+  //res.render('start', {user: sharedValue });
+
+}) //End of this /todo/api/start
 
 
 // GET /todos/create - Show the form to create a new todo

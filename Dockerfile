@@ -31,6 +31,11 @@ RUN npm install pug
 #install axios
 RUN npm install --save axios
 
+# install jsonwebtoken
+RUN npm install jsonwebtoken
+
+RUN npm install jwks-rsa
+
 #Install mongoose
 RUN npm install mongoose
 
