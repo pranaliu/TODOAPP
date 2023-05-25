@@ -18,6 +18,6 @@ TO DO APP with Docker Compose
    DB collection : TODODB
 
 # Support :
-FusionAuth support : https://fusionauth.io/contact
-ToDo App support   : pranaliu
-
+1. FusionAuth support        : https://fusionauth.io/contact
+2. Fusion Auth Documentation : https://fusionauth.io/docs/
+3. ToDo App support          : pranaliu
