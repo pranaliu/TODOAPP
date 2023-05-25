@@ -9,20 +9,28 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/">Todo App</a>
+  <a class="navbar-brand" href="/">Todo App</a>
+</nav>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">Show all Todo List</a>
 </nav>
 <body>
-<div class="container mt-5">
-    <% if (user) { %>
-        <p> Hello <%= user.firstName %> </p>
-        <p> Welcome to TODO APP </p>  
-        <a class="btn btn-md btn-primary mx-2" href="/todo/start">Let's Get Started!</a>
-        <a href=“<%= fusionAuthURL %>/oauth2/logout/?client_id=<%= clientId %>” > Logout </a>
-        <%} else { %>
-        <p> Please use Login to authenticate yourself. </p>     
-        <a href=“<%= fusionAuthURL %>/oauth2/authorize?client_id=<%= clientId %>&response_type=code&redirect_uri=http://localhost:3000/oauth-redirect&scope=offline_access&state=<%= stateValue %>&code_challenge=<%= challenge %>&code_challenge_method=S256”> Login </a>
-    <% } %>
-</div>
+  <div class="container mt-5">
+    <body>
+        <% if (todos) { %>
+        <p> Here is your ToDo List </p>
+          <ul>
+            <% todos.forEach(todo => { %>
+            <li>
+                <a href="/todo/<%= todo._id %>"><%= todo.title %></a>       
+            </li>
+           <% }); %>
+        </ul>
+        <% } else { %>
+          <h1>No Tasks to view</h1>
+        <% } %>
+     </body>    
+    </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 crossorigin="anonymous"></script>

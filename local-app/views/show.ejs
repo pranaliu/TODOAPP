@@ -11,8 +11,12 @@
   <h1><%= todo.title %></h1>
   <p>Date: <%= todo.date.toDateString() %></p>
   <p><%= todo.description %></p>
-  
-  <a class="btn btn-md btn-primary mx-2" href="/edit/todo/<%= todo._id %>">Edit</a>
+  <p><%= todo.userEmail %></p> 
+  <% if (AdminUser === 'true') { %>
+    <a class="btn btn-md btn-primary mx-2" href="/edit/admin/todo/<%= todo._id %>">Edit</a>
+    <%} else { %>
+      <a class="btn btn-md btn-primary mx-2" href="/edit/todo/<%= todo._id %>">Edit</a>
+<% } %>
   <form action="/delete/todo/<%= todo._id %>" method="POST">
     <button  class="btn btn-danger btn-sm"  type="submit">Delete</button>
   </form>
