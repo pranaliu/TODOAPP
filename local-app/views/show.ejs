@@ -15,7 +15,7 @@
   <p>Date: <%= todo.date.toDateString() %></p>
   <p><%= todo.description %></p>
   <p><%= todo.userEmail %></p> 
-  <% if (AdminUser === 'true') { %>
+  <% if (AdminUser) { %>
     <a class="btn btn-md btn-primary mx-2" href="/edit/admin/todo/<%= todo._id %>">Edit</a>
     <%} else { %>
       <a class="btn btn-md btn-primary mx-2" href="/edit/todo/<%= todo._id %>">Edit</a>

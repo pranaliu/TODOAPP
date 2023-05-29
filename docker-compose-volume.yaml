@@ -1,9 +1,17 @@
 version: '3'
 services:
-  dockerdemo:
-    image: pranaliaws/todoapp:1.0
+  #dockerdemo:
+  #  image: pranaliaws/todoapp:1.0
+  #  ports:
+  #    - 3000:3000
+  todoapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 3000:3000
+    depends_on:
+      - mongodb
   mongodb:
     image: mongo
     ports:
