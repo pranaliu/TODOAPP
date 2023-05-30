@@ -32,11 +32,11 @@ RUN npm install pug
 RUN npm install --save axios
 
 # install jsonwebtoken
-#RUN npm install jsonwebtoken
+RUN npm install jsonwebtoken
 
-#RUN npm install jwks-rsa
+RUN npm install jwks-rsa
 
-#RUN npm install cookie-parser
+RUN npm install cookie-parser
 
 #Install mongoose
 RUN npm install mongoose

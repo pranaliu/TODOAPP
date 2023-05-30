@@ -2,7 +2,6 @@ const router = require("express").Router();
 const { FindOperators, FindCursor } = require("mongodb");
 const Todo = require("../models/Todo");
 const {FusionAuthClient} = require('@fusionauth/typescript-client');
-const {setSharedValue, setSessionSharedValues } = require('./shared');
 const util = require('util');
 
 // tag::clientIdSecret[]
@@ -46,12 +45,8 @@ router.get('/', function (req, res, next) {
   const challenge = pkce_pair['code_challenge'];
   const user = req.session.user;
   const access_token = req.session.access_token;
-  // Storing session values 
-  setSessionSharedValues('user',user);
-  setSessionSharedValues('access_token',access_token);
-  //Store user value to reuse with todo API's
-  setSharedValue(user);
-  res.render('index', {user: user, access_token: access_token, title: 'FusionAuth Example', clientId: clientId, challenge: challenge, stateValue: stateValue, fusionAuthURL: fusionAuthURL});
+  const refresh_token = req.session.refresh_token;
+  res.render('index', {user: user, access_token: access_token, refresh_token:refresh_token, title: 'FusionAuth Example', clientId: clientId, challenge: challenge, stateValue: stateValue, fusionAuthURL: fusionAuthURL});
 });
 
 // tag::fullOAuthCodeExchange[]
@@ -78,6 +73,7 @@ router.get('/oauth-redirect', function (req, res, next) {
       .then((response) => {
         console.log(response.response.access_token);
         req.session.access_token = response.response.access_token;
+        req.session.refresh_token = response.response.refresh_token;
         return client.retrieveUserUsingJWT(response.response.access_token);
       })
       .then((response) => {
